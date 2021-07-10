@@ -1,0 +1,10 @@
+load("@io_bazel_rules_k8s//k8s:object.bzl", "k8s_object")
+
+k8s_object(
+    name = "k8s",
+    images = {
+        "leoh0/petstore-image": "//cmd:image",
+    },
+    kind = "deployment",
+    template = ":deployment.yaml",
+)
