@@ -8,3 +8,9 @@ k8s_object(
     kind = "deployment",
     template = ":deployment.yaml",
 )
+
+k8s_object(
+    name = "k8s-dev",
+    kind = "deployment",
+    template = ":deployment.yaml",
+)
