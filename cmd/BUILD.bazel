@@ -44,3 +44,20 @@ go_image(
     pure = "on",
     visibility = ["//visibility:public"],
 )
+
+load("@io_bazel_rules_docker//container:bundle.bzl", "container_bundle")
+load("@io_bazel_rules_docker//contrib:push-all.bzl", "container_push")
+
+container_bundle(
+    name = "bundle",
+    images = {
+        "docker.io/leoh0/petstore" + ":{DOCKER_TAG}": ":image",
+        "docker.io/leoh0/petstore" + ":latest": ":image",
+    },
+)
+
+container_push(
+    name = "push",
+    bundle = ":bundle",
+    format = "Docker",
+)

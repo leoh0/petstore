@@ -1,0 +1,2 @@
+run --workspace_status_command=./hack/print-workspace-status.sh
+build --workspace_status_command=./hack/print-workspace-status.sh
