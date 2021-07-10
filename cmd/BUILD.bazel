@@ -33,3 +33,13 @@ go_test(
         "@com_github_stretchr_testify//require",
     ],
 )
+
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_image(
+    name = "image",
+    embed = [":cmd_lib"],
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+)
