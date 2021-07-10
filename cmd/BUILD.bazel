@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "cmd_lib",
+    srcs = ["petstore.go"],
+    importpath = "github.com/leoh0/petstore/cmd",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//api",
+        "@com_github_deepmap_oapi_codegen//pkg/middleware",
+        "@com_github_labstack_echo_v4//:echo",
+        "@com_github_labstack_echo_v4//middleware",
+    ],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":cmd_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "cmd_test",
+    srcs = ["petstore_test.go"],
+    embed = [":cmd_lib"],
+    deps = [
+        "//api",
+        "@com_github_deepmap_oapi_codegen//pkg/middleware",
+        "@com_github_deepmap_oapi_codegen//pkg/testutil",
+        "@com_github_labstack_echo_v4//:echo",
+        "@com_github_labstack_echo_v4//middleware",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

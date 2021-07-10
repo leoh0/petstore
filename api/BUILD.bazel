@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "api",
+    srcs = [
+        "client.gen.go",
+        "petstore.go",
+        "server.gen.go",
+        "spec.gen.go",
+        "type.gen.go",
+    ],
+    importpath = "github.com/leoh0/petstore/api",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_deepmap_oapi_codegen//pkg/runtime",
+        "@com_github_getkin_kin_openapi//openapi3",
+        "@com_github_labstack_echo_v4//:echo",
+    ],
+)
